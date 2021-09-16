@@ -1,25 +1,20 @@
-import sys
+from sys import stdin
+lines = stdin.read().splitlines()
 
-lines = sys.stdin.read().splitlines()
+letters = list(range(ord('a'), ord('z')+1))
+num = {chr(x): x - ord('a') for x in letters}
+letter = {k:v for (v,k) in num.items()}
 
-letters = [x for x in range(ord('a'), ord('z')+1)]
-t = {chr(x): x - ord('a') for x in letters}
-t_inv = {k:v for (v,k) in t.items()}
+n, m = map(int, lines[0].split())
+hint = [num[x] for x in lines[1]]
+cipher = [num[x] for x in lines[2]]
 
-n, m = map(lambda x: int(x), lines[0].split())
-last_letters = [t[x] for x in lines[1]]
-cipher = [t[x] for x in lines[2]]
-print(t)
-
+plain_text = [0 for _ in range(m-n)] + hint
 
 mod = 26
 
-diff = (cipher[-1] + mod - last_letters[-1]) % mod
-text = [t_inv[(x + diff) % mod] for x in cipher]
+for i in range(m-n-1, -1, -1):
+    plain_text[i] = (cipher[i+n] - plain_text[i+n] + mod) % mod
 
-inv = lambda x: t_inv[x]
+print("".join([letter[x] for x in plain_text]))
 
-print(list(map(inv, last_letters)))
-print(list(map(inv, cipher)))
-
-print("".join(text))
