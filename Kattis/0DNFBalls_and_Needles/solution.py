@@ -17,6 +17,7 @@ for line in range(1, k+1):
 
 
 def dfs3d(x, y, z):
+    pass
     
 
 for (x1, y1) in points.keys():
