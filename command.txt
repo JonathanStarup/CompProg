@@ -1,1 +1,12 @@
 cls && py solution.py < si1 && echo ----- && type so1
+
+cls && py solution.py < si2 && echo ----- && type so2
+
+cls && py solution.py < si3 && echo ----- && type so3
+
+cls && py solution.py < si4 && echo ----- && type so4
+
+
+cls && py solution.py < si1 && echo --1-- && type so1 && echo ----- && py solution.py < si2 && echo --2-- && type so2
+
+cls && py solution.py < si1 && echo --1-- && type so1 && echo ----- && py solution.py < si2 && echo --2-- && type so2 && echo ----- && py solution.py < si3 && echo --3-- && type so3
