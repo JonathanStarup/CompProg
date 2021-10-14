@@ -3,6 +3,7 @@ from collections import deque
 #INF = float('inf')
 lines = iter(sys.stdin.read().splitlines())
 #def debug(*ss): print("\n".join(map(lambda s:f"\t{s} = {globals()[s] if s in globals() else locals()[s]}", ss)))
+def debug(*ss): print("  >"+" ".join(map(lambda s:f"{s:>8} = {globals()[s] if s in globals() else locals()[s]:<10}", ss)))
 
 TESTS = int(next(lines))
 for _ in range(TESTS):
@@ -25,6 +26,7 @@ for _ in range(TESTS):
         for v2 in edges[v1]:
             indeg[v2] -= 1
             if indeg[v2] == 1:
+                debug("v1", "v2")
                 cut_step[v2] = cut_step[v1] + 1
                 todo.appendleft(v2)
     left = N
