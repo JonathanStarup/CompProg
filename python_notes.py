@@ -8,6 +8,21 @@ def debug(*ss): print("\n".join(map(lambda s:f"\t{s} = {globals()[s] if s in glo
 # infinite
 INF = float('inf')
 
+# floats
+.5
+1.
+
+# 2d distance and norm
+from math import hypot
+x1, y1, x2, y2  = 0, 1, 5, 4
+hypot(x2-x1, y2-y1)
+
+# flush print (doenst work with end='')
+def print(*s): print(*s, flush=True)
+print("hey")
+import sys
+sys.stdout.flush()
+
 # debug things
 def debug(*ss): print("\n".join(map(lambda s:f"\t{s} = {globals()[s] if s in globals() else locals()[s]}", ss)))
 
