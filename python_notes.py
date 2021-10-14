@@ -62,3 +62,19 @@ cnt.items()
 from collections import defaultdict
 d = defaultdict(lambda: "hej") # default value is "hej"
 
+# Topsort
+N = 123
+edges = [[] for _ in range(N)]
+indeg = [0] * N
+todo = [i for i in range(N) if indeg[i] == 0]
+topsort = []
+while todo:
+    v1 = todo.pop()
+    topsort.append(v1)
+    for v2 in edges[v1]:
+        indeg[v2] -= 1
+        if indeg[v2] == 0:
+            todo.append(v2)
+if len(topsort) != N:
+    # cycle
+    pass
