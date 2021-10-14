@@ -1,43 +1,34 @@
-from sys import stdin
+import sys
 from collections import deque
-lines = stdin.read().splitlines()
-tests = int(lines[0])
-l_index = 2
-for test in range(tests):
-    n, k = map(int, lines[l_index].split())
-    l_index += 1
-    edges = [[] for _ in range(n)]
-    edgen = [0 for _ in range(n)]
-    for li in range(n-1):
-        u, v = map(int, lines[l_index + li].split())
-        edges[u-1].append(v-1)
-        edges[v-1].append(u-1)
-        edgen[u-1] += 1
-        edgen[v-1] += 1
-    l_index += n-1
-    l_index += 1
+#INF = float('inf')
+lines = iter(sys.stdin.read().splitlines())
+#def debug(*ss): print("\n".join(map(lambda s:f"\t{s} = {globals()[s] if s in globals() else locals()[s]}", ss)))
 
-    todo = deque()
-    todo_next = deque()
-    edges_left = n
-    for v in range(n):
-        if edgen[v] <= 1:
-            todo.appendleft(v)
-    for cut in range(k):
-        while len(todo) != 0:
-            next = todo.pop()
-            edges_left -= 1
-            for edge in edges[next]:
-                if edgen[edge] > 0:
-                    edgen[edge] -= 1
-                if edgen[edge] == 1:
-                    todo_next.appendleft(edge)
-        todo, todo_next = todo_next, todo
-        if len(todo) == 0:
-            break
-    print(edges_left)
-
-
-
-
-
+TESTS = int(next(lines))
+for _ in range(TESTS):
+    next(lines)
+    N, K = map(int, next(lines).split())
+    edges = [[] for _ in range(N)]
+    indeg = [0] * N
+    for _ in range(N-1):
+        v1_1, v2_1 = map(int, next(lines).split())
+        v1, v2 = v1_1 - 1, v2_1 - 1
+        edges[v1].append(v2)
+        edges[v2].append(v1)
+        indeg[v1] += 1
+        indeg[v2] += 1
+    
+    todo = deque([i for i in range(N) if indeg[i] <= 1])
+    cut_step = [1] * N
+    while todo:
+        v1 = todo.pop()
+        for v2 in edges[v1]:
+            indeg[v2] -= 1
+            if indeg[v2] == 1:
+                cut_step[v2] = cut_step[v1] + 1
+                todo.appendleft(v2)
+    left = N
+    for v in range(N):
+        if cut_step[v] <= K:
+            left -= 1
+    print(left)

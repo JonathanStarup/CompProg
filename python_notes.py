@@ -26,11 +26,17 @@ sys.stdout.flush()
 # debug things
 def debug(*ss): print("\n".join(map(lambda s:f"\t{s} = {globals()[s] if s in globals() else locals()[s]}", ss)))
 
-# Input
+# Input (slower, non-alloc)
 import sys
 #def input(): return sys.stdin.readline().rstrip()
 input = lambda: sys.stdin.readline().rstrip()
 def iinput(): return list(map(int, input().split()))
+
+# Input (faster, in-memory)
+import sys
+input = iter(sys.stdin.read().splitlines())
+next(input)
+n, k = map(int, next(input).split())
 
 # unfold
 lst = [1, 2, 3] 
@@ -78,3 +84,16 @@ while todo:
 if len(topsort) != N:
     # cycle
     pass
+
+# BFS / (DFS)
+from collections import deque # (pass)
+N = 123
+START = 0
+edges = [[] for _ in range(N)]
+seen = [False] * N
+todo = deque([START]) # ([START])
+while todo:
+    v1 = todo.pop()
+    for v2 in edges[v1]:
+        if seen[v2]: continue
+        todo.appendleft(v2) # (todo.append(v2))
