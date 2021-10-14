@@ -24,11 +24,8 @@ for test in range(tests):
         if edgen[v] <= 1:
             todo.appendleft(v)
     for cut in range(k):
-        #print("cut:", cut)
-        #print("now:", edges_left)
         while len(todo) != 0:
             next = todo.pop()
-            #print(next+1, "removed")
             edges_left -= 1
             for edge in edges[next]:
                 if edgen[edge] > 0:
@@ -36,6 +33,8 @@ for test in range(tests):
                 if edgen[edge] == 1:
                     todo_next.appendleft(edge)
         todo, todo_next = todo_next, todo
+        if len(todo) == 0:
+            break
     print(edges_left)
 
 
