@@ -1,0 +1,1 @@
+cls && py solution.py < si1 && echo ----- && type so1
