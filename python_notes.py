@@ -89,7 +89,7 @@ if len(topsort) != N:
     pass
 
 # BFS / (DFS)
-from collections import deque # (pass)
+from collections import deque # ()
 N = 123
 START = 0
 edges = [[] for _ in range(N)]
@@ -97,6 +97,8 @@ seen = [False] * N
 todo = deque([START]) # ([START])
 while todo:
     v1 = todo.pop()
+    if seen[v1]: continue
+    seen[v1] = True
     for v2 in edges[v1]:
         if seen[v2]: continue
         todo.appendleft(v2) # (todo.append(v2))
