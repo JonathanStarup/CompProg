@@ -2,7 +2,7 @@
 import sys
 INF = float('inf')
 input = iter(sys.stdin.read().splitlines())
-def iinput(): return list(map(int, next(input).split()))
+def iinput(): return map(int, next(input).split())
 def debug(*ss): print("  >"+" ".join(map(lambda s:f"{s:>8} = {globals()[s] if s in globals() else locals()[s]:<10}", ss)))
 
 # infinite
@@ -11,6 +11,9 @@ INF = float('inf')
 # floats
 .5
 1.
+
+# Other notes
+# https://github.com/kth-competitive-programming/kactl
 
 # 2d distance and norm
 from math import hypot
@@ -70,7 +73,7 @@ d = defaultdict(lambda: "hej") # default value is "hej"
 
 # Topsort
 N = 123
-edges = [[] for _ in range(N)]
+edges = [[] for _ in range(N)] # adjencency list
 indeg = [0] * N
 todo = [i for i in range(N) if indeg[i] == 0]
 topsort = []
@@ -97,3 +100,21 @@ while todo:
     for v2 in edges[v1]:
         if seen[v2]: continue
         todo.appendleft(v2) # (todo.append(v2))
+
+# FloydWarshall
+INF = float('inf')
+N = 123
+edges = [[0] * N for _ in range(N)] # matrix with weights(+/-) or INF
+for i in range(N): edges[i][i] = min(edges[i][i], 0)
+for k in range(N):
+    for i in range(N):
+        for j in range(N):
+            if edges[i][k] != INF and edges[k][j] != INF:
+                new_d = max(edges[i][k] + edges[k][j], -INF) # why max? 
+                edges[i][j] = min(edges[i][j], new_d)
+for k in range(N): # skip if pos edges
+    if edges[k][k] < 0:
+        for i in range(N):
+            for j in range(N):
+                if edges[i][k] != INF and edges[k][j] != INF:
+                    edges[i][j] = -INF
