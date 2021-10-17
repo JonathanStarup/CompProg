@@ -12,6 +12,11 @@ INF = float('inf')
 .5
 1.
 
+# scope
+for i in range(123):
+    pass
+print(i)
+
 # Other notes
 # https://github.com/kth-competitive-programming/kactl
 

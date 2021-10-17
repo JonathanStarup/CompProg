@@ -10,18 +10,17 @@ for _ in range(T):
     N = int(next(input))
     bfs = list(iinput())
     parents = deque([0])
-    group_size = 0
-    reset = True
-    for i in range(1, N):
-        if reset:
-            reset = False
-            group_size += 1
-            continue
+    group_size = 1
+    height = 1
+    for i in range(2, N):
         if bfs[i] < bfs[i-1]:
-            reset = True
             level = parents.popleft() + 1
+            height = max(height, level)
             parents.extend([level]*group_size)
             group_size = 0
-
+        group_size += 1
+        
+    level = parents.popleft() + 1
+    height = max(height, level)
 
     print(height)
