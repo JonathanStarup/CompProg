@@ -43,8 +43,9 @@ def iinput(): return list(map(int, input().split()))
 # Input (faster, in-memory)
 import sys
 input = iter(sys.stdin.read().splitlines())
+def iinput(): return list(map(int, next(input).split()))
 next(input)
-n, k = map(int, next(input).split())
+n, k = iinput()
 
 # unfold
 lst = [1, 2, 3] 
