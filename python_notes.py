@@ -65,6 +65,9 @@ queue.appendleft(2)
 queue.popleft()
 queue.pop()
 
+# priority queue
+from heapq import heappop, heappush, heapify
+
 # count things
 from collections import Counter
 cnt = Counter("DKLVFAHKLGASFLG")
