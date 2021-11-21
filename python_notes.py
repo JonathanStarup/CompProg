@@ -1,7 +1,8 @@
 # copy-setup
 import sys
 input = iter(sys.stdin.read().splitlines())
-def iinput(): return list(map(int, next(input).split()))
+def ii(): return int(next(input))
+def iii(): return list(map(int, next(input).split()))
 
 # infinite
 INF = float('inf')
