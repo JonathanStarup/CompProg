@@ -1,6 +1,4 @@
 # https://open.kattis.com/problems/electricaloutlets
-# Electrical_Outlets-1_2-[trivial]-Kattis-electricaloutlets-2021-11
-
 import sys
 input = iter(sys.stdin.read().splitlines())
 def ii(): return int(next(input))
@@ -15,4 +13,3 @@ for _ in range(n):
     for i in range(1, k):
         res += o[i] - 1
     print(res)
-
